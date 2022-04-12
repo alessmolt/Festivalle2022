@@ -23,7 +23,14 @@ ROTATION RATE: An object giving the rate of change of the device's orientation o
 INTERVAL: A number representing the interval of time, in milliseconds, at which data is obtained from the device.
 */
 function accellerometro(event) {
-  console.log(event.rotationRate.alpha);
+  document.getElementById('cerchio').style.backgroundColor =
+    'rgb(' +
+    event.rotationRate.alpha +
+    ',' +
+    event.rotationRate.beta +
+    ',' +
+    event.rotationRate.gamma +
+    ')';
   socket.send(
     JSON.stringify({
       accelerazioneX: event.acceleration.x,
@@ -49,6 +56,8 @@ BETA = Rotation around the x axis -- that is, tipping the device away from or to
 GAMMA = Rotation around the y axis -- that is, tilting the device toward the left or right -- causes the gamma rotation angle to change:The gamma angle is 0° when the device's left and right sides are the same distance from the surface of the Earth, and increases toward 90° as the device is tipped toward the right, and toward -90° as the device is tipped toward the left.
 */
 function giroscopio(evento) {
+  //document.getElementById('cerchio').style.backgroundColor =
+  //"rgb(" + event.alpha + "," + event.beta + "," + event.gamma + ")";
   socket.send(
     JSON.stringify({
       alpha: evento.alpha,
