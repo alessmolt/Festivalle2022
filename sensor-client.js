@@ -56,8 +56,6 @@ BETA = Rotation around the x axis -- that is, tipping the device away from or to
 GAMMA = Rotation around the y axis -- that is, tilting the device toward the left or right -- causes the gamma rotation angle to change:The gamma angle is 0° when the device's left and right sides are the same distance from the surface of the Earth, and increases toward 90° as the device is tipped toward the right, and toward -90° as the device is tipped toward the left.
 */
 function giroscopio(evento) {
-  //document.getElementById('cerchio').style.backgroundColor =
-  //"rgb(" + event.alpha + "," + event.beta + "," + event.gamma + ")";
   socket.send(
     JSON.stringify({
       alpha: evento.alpha,
