@@ -1,12 +1,17 @@
 from autobahn.asyncio.websocket import WebSocketServerProtocol, WebSocketServerFactory
 import ssl
-
+import socket
 import asyncio
 import sys, traceback
 from binascii import hexlify
 import json
 
 from .wssclient import DebugPrinter
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+personal_ip = s.getsockname()[0]
+s.close()
 
 class Client:
 	def __init__(self, handle):
@@ -123,7 +128,9 @@ class Server(DebugPrinter):
 
 		ResourceProtocol.server = self
 
-		factory = WebSocketServerFactory(u"{0}://127.0.0.1:{1}".format(ws, self.port))
+		#IP ON WHICH THE SEVER IS STARTING MUST MATCH THE ONE ON THE SENSOR CLIENT!!!!
+
+		factory = WebSocketServerFactory(u"{0}://{2}:{1}".format(ws, self.port, personal_ip))
 		factory.protocol = ResourceProtocol
 
 		loop = asyncio.get_event_loop()
