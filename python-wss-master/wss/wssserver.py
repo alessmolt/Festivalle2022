@@ -8,10 +8,20 @@ import json
 
 from .wssclient import DebugPrinter
 
+from pythonosc.udp_client import SimpleUDPClient
+
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 personal_ip = s.getsockname()[0]
 s.close()
+
+ip_osc = "127.0.0.1"
+port_osc = 1337
+
+client_osc = SimpleUDPClient(ip_osc, port_osc)  # Create client
+
+client_osc.send_message("/some/address", 123)   # Send float message
+client_osc.send_message("/some/address", [1, 2., "hello"])  # Send message with int, float and string
 
 class Client:
 	def __init__(self, handle):

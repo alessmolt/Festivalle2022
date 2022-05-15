@@ -6,7 +6,7 @@ function traccia(evento) {
 }
 */
 
-let socket = new WebSocket('wss://192.168.1.168:8000');
+let socket = new WebSocket('wss://192.168.1.208:8000');
 
 socket.addEventListener('open', prontoPerMuovere);
 function prontoPerMuovere(event) {
