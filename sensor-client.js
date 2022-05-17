@@ -32,15 +32,18 @@ function accellerometro(event) {
     event.rotationRate.gamma +
     ')';
   socket.send(
-    JSON.stringify({
-      accelerazioneX: event.acceleration.x,
-      accelerazioneY: event.acceleration.y,
-      accelerazioneZ: event.acceleration.z,
-      rotationRateX: event.rotationRate.alpha,
-      rotationRateY: event.rotationRate.beta,
-      rotationRateZ: event.rotationRate.gamma,
-      interval: event.interval,
-    })
+    // JSON.stringify({
+    //   accelerazioneX: event.acceleration.x,
+    //   accelerazioneY: event.acceleration.y,
+    //   accelerazioneZ: event.acceleration.z,
+    //   rotationRateX: event.rotationRate.alpha,
+    //   rotationRateY: event.rotationRate.beta,
+    //   rotationRateZ: event.rotationRate.gamma,
+    //   interval: event.interval,
+    // })
+    ((event.rotationRate.alpha + 300) * (1 + 1)) / (300 + 300) - 1,
+    ((event.rotationRate.beta + 300) * (1 + 1)) / (300 + 300) - 1,
+    ((event.rotationRate.gamma + 300) * (1 + 1)) / (300 + 300) - 1
   );
 }
 
@@ -59,11 +62,11 @@ GAMMA = Rotation around the y axis -- that is, tilting the device toward the lef
 function giroscopio(evento) {
   document.getElementById('cerchio').style.backgroundColor =
     'rgb(' + evento.alpha + ',' + evento.beta + ',' + evento.gamma + ')';
-  socket.send(
-    JSON.stringify({
-      alpha: evento.alpha,
-      beta: evento.beta,
-      gamma: evento.gamma,
-    })
-  );
+  // socket.send(
+  //   JSON.stringify({
+  //     alpha: evento.alpha,
+  //     beta: evento.beta,
+  //     gamma: evento.gamma,
+  //   })
+  // );
 }

@@ -1,5 +1,6 @@
 import wss
 import asyncio
+import time
 
 from pythonosc.udp_client import SimpleUDPClient
 
@@ -16,8 +17,8 @@ server =  wss.Server(port=8000, useSsl=True, sslCert="python-wss-master/cert/ser
 
 def onTextMessage(msg, client):
 	print("got message from client:", msg)
-	client_osc.send_message("/medias/Gradient_Color/Color/Adjust/Brightness", 0.5)   # Send float message
-
+	client_osc.send_message("/medias/Gradient_Color/Color/Adjust/Brightness",msg.decode())  # Send float message
+	
 
 def onBinaryMessage(msg, client):
 	print("got binary message")
