@@ -9,6 +9,7 @@ function traccia(evento) {
 let socket = new WebSocket('wss://192.168.1.208:8000');
 
 socket.addEventListener('open', prontoPerMuovere);
+
 function prontoPerMuovere(event) {
   window.addEventListener('deviceorientation', giroscopio);
   window.addEventListener('devicemotion', accellerometro);
@@ -41,9 +42,15 @@ function accellerometro(event) {
     //   rotationRateZ: event.rotationRate.gamma,
     //   interval: event.interval,
     // })
-    ((event.rotationRate.alpha + 300) * (1 + 1)) / (300 + 300) - 1,
-    ((event.rotationRate.beta + 300) * (1 + 1)) / (300 + 300) - 1,
-    ((event.rotationRate.gamma + 300) * (1 + 1)) / (300 + 300) - 1
+    // ((event.rotationRate.alpha + 360) * (1 + 1)) / (360 + 360) - 1,
+    // ((event.rotationRate.beta + 360) * (1 + 1)) / (360 + 360) - 1,
+    // ((event.rotationRate.gamma + 360) * (1 + 1)) / (360 + 360) - 1
+    ((Math.abs(event.rotationRate.alpha) +
+      Math.abs(event.rotationRate.beta) +
+      Math.abs(event.rotationRate.gamma)) *
+      (1 + 1)) /
+      1500 -
+      1
   );
 }
 
