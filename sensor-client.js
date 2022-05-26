@@ -67,7 +67,7 @@ GAMMA = Rotation around the y axis -- that is, tilting the device toward the lef
 */
 
 function giroscopio(evento) {
-  document.getElementById('cerchio').style.backgroundColor =
+  document.getElementById('body').style.backgroundColor =
     'rgb(' + evento.alpha + ',' + evento.beta + ',' + evento.gamma + ')';
   // socket.send(
   //   JSON.stringify({
