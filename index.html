@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta
-      http-equiv="origin-trial"
-      data-feature="Generic Sensors"
-      data-expires="2018-02-27"
-      content="AjL+UlBzLjx+0FPXrML6IMA/Ax9GsO/7rUvV/aaKkh3KknUSwDBgymn0d3NhGeRMNS7FlYD73ernqvZNoqzNMw4AAABWeyJvcmlnaW4iOiJodHRwczovL2ludGVsLmdpdGh1Yi5pbzo0NDMiLCJmZWF0dXJlIjoiR2VuZXJpY1NlbnNvciIsImV4cGlyeSI6MTUxOTczOTAwNX0="
-    />
-  </head>
   <style>
     html,
     body {
@@ -15,6 +7,7 @@
       margin: 0;
       padding: 0;
       background-color: #555;
+      overflow: hidden;
     }
 
     div {
@@ -23,7 +16,7 @@
       width: 100%;
     }
 
-    div img {
+    #festivalle {
       position: absolute;
       top: 0;
       left: 0;
@@ -31,9 +24,42 @@
       bottom: 0;
       margin: auto;
     }
+
+    #polimi {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      width: 300px; /* you can use % */
+      height: auto;
+      padding-bottom: 10%;
+      padding-right: 10%;
+    }
+
+    .image-stack {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      position: relative;
+    }
+
+    .image-stack__item--top {
+      grid-column: 1;
+      grid-row: 1;
+      z-index: 1;
+    }
+    .image-stack__item--bottom {
+      grid-column: 4 / -1;
+      grid-row: 1;
+    }
   </style>
   <body id="body">
-    <div><img src="img/LOGO VERTICALE - BIANCO.png" /></div>
+    <div class="image-stack">
+      <div class="image-stack__item image-stack__item--top">
+        <img id="festivalle" src="img/LOGO VERTICALE - BIANCO.png" />
+      </div>
+      <div class="image-stack__item image-stack__item--bottom">
+        <img id="polimi" src="img/polimi_logo.png" />
+      </div>
+    </div>
   </body>
   <script src="sensor-client.js"></script>
 </html>

@@ -29,9 +29,6 @@ def onTextMessage(msg, client):
 		lista_movimenti.clear()
 
 
-	
-	
-
 def onBinaryMessage(msg, client):
 	print("got binary message")
 

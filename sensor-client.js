@@ -1,11 +1,3 @@
-/*window.addEventListener('deviceorientation', traccia, false);
-function traccia(evento) {
-  document.querySelector('div.alpha span').innerHTML = Math.round(evento.alpha);
-  document.querySelector('div.beta span').innerHTML = Math.round(evento.beta);
-  document.querySelector('div.gamma span').innerHTML = Math.round(evento.gamma);
-}
-*/
-
 let socket = new WebSocket('wss://192.168.1.208:8000');
 
 socket.addEventListener('open', prontoPerMuovere);
@@ -14,6 +6,8 @@ function prontoPerMuovere(event) {
   window.addEventListener('deviceorientation', giroscopio);
   window.addEventListener('devicemotion', accellerometro);
 }
+
+const lista_dati = new Array();
 
 /*
 ACCELERATION: An object giving the acceleration of the device on the three axis X, Y and Z. Acceleration is expressed in m/s²
@@ -24,34 +18,19 @@ INTERVAL: A number representing the interval of time, in milliseconds, at which 
 */
 
 function accellerometro(event) {
-  document.getElementById('cerchio').style.backgroundColor =
-    'rgb(' +
-    event.rotationRate.alpha +
-    ',' +
-    event.rotationRate.beta +
-    ',' +
-    event.rotationRate.gamma +
-    ')';
-  socket.send(
-    // JSON.stringify({
-    //   accelerazioneX: event.acceleration.x,
-    //   accelerazioneY: event.acceleration.y,
-    //   accelerazioneZ: event.acceleration.z,
-    //   rotationRateX: event.rotationRate.alpha,
-    //   rotationRateY: event.rotationRate.beta,
-    //   rotationRateZ: event.rotationRate.gamma,
-    //   interval: event.interval,
-    // })
-    // ((event.rotationRate.alpha + 360) * (1 + 1)) / (360 + 360) - 1,
-    // ((event.rotationRate.beta + 360) * (1 + 1)) / (360 + 360) - 1,
-    // ((event.rotationRate.gamma + 360) * (1 + 1)) / (360 + 360) - 1
-    ((Math.abs(event.rotationRate.alpha) +
+  lista_dati.push(
+    Math.abs(event.rotationRate.alpha) +
       Math.abs(event.rotationRate.beta) +
-      Math.abs(event.rotationRate.gamma)) *
-      (1 + 1)) /
-      1500 -
-      1
+      Math.abs(event.rotationRate.gamma)
   );
+
+  console.log(lista_dati.length);
+  if (lista_dati.length === 20) {
+    //ogni quanti messaggi invia i dati mediati al server
+    let sum = lista_dati.reduce((a, b) => a + b, 0);
+    socket.send(((sum / lista_dati.length) * (1 + 1)) / 1500 - 1); // media movimento singolo utente
+    lista_dati.length = 0;
+  }
 }
 
 /*
