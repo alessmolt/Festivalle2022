@@ -9,8 +9,9 @@ function readyToStart(event) {
 }
 
 const buffer_dati = new Array();
-const MAX_ROTATION = 1800; // Rotation rate value corresponding to a multiplying factor of 1.5 of the acceleration
-const BUFFER_LENGTH = 20; // Number of single user data to be stored in the buffer
+const MAX_ROTATION = 1800; // Rotation rate value corresponding to a multiplying factor of MAX_MULTIPLIER of the acceleration.
+const BUFFER_LENGTH = 20; // Number of single user data to be stored in the buffer.
+const MAX_MULTIPLIER = 1.5; // Maximum value of RotationRate as a weight for the acceleration.
 
 /*
 ACCELERATION: An object giving the acceleration of the device on the three axis X, Y and Z. Acceleration is expressed in m/s²
@@ -22,7 +23,7 @@ function accellerometro(event) {
     ((Math.abs(event.rotationRate.alpha) +
       Math.abs(event.rotationRate.beta) +
       Math.abs(event.rotationRate.gamma)) *
-      (1.5 - 1)) /
+      (MAX_MULTIPLIER - 1)) /
       MAX_ROTATION +
     1;
 
@@ -33,6 +34,7 @@ function accellerometro(event) {
         Math.pow(event.acceleration.z, 2)
     ) * rotation_rate
   );
+
   if (buffer_dati.length === BUFFER_LENGTH) {
     let sum_acc = buffer_dati.reduce((a, b) => a + b, 0);
     socket.send(sum_acc / buffer_dati.length); //sends to the server the mean of the buffer data

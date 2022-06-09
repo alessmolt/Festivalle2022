@@ -29,11 +29,11 @@ def onTextMessage(msg, client):
 		value = sum([float(i) for i in movement_buffer]) / len(movement_buffer) # Mean of the buffer containing all the user data 
 		print("ENTRATO!!!!!!! --> " + str(value))
 		if value > 20:
-			client_osc.send_message("/cues/selected/columns/6",value)  # Send float message
+			client_osc.send_message("/cues/selected/columns/5",value)  # Send float message
 		elif value > 10:
-			client_osc.send_message("/cues/selected/columns/5",value)
+			client_osc.send_message("/cues/selected/columns/4",value)
 		else:
-			client_osc.send_message("/cues/selected/columns/2",value)
+			client_osc.send_message("/cues/selected/columns/3",value)
 
 		movement_buffer.clear()
 
