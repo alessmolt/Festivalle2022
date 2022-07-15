@@ -8,7 +8,7 @@ A key aspect of this project is to propose a sophisticated system with technolog
 
 The system suggested in this repository is done in collaboration with Festivalle2022, an Italian jazz festival  .  
 
-For a full detailed description of our system we suggest to read [our paper](L29_Report.pdf)
+For a full detailed description of our system we suggest to read [our paper](L29_Report.pdf).
 
 ## How to use
 
