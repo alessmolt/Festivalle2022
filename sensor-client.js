@@ -1,4 +1,5 @@
-let socket = new WebSocket('wss://192.168.1.208:8000');
+//let socket = new WebSocket('wss://192.168.1.208:8000');
+let socket = new WebSocket('wss://vps-f43cf8f3.vps.ovh.net:8000');
 
 socket.addEventListener('open', readyToStart);
 
