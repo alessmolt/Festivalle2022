@@ -11,7 +11,7 @@ function readyToStart(event) {
 
 const buffer_dati = new Array();
 const MAX_ROTATION = 1800; // Rotation rate value corresponding to a multiplying factor of MAX_MULTIPLIER of the acceleration.
-const BUFFER_LENGTH = 20; // Number of single user data to be stored in the buffer.
+const BUFFER_LENGTH = 512; // Number of single user data to be stored in the buffer.
 const MAX_MULTIPLIER = 1.5; // Maximum value of RotationRate as a weight for the acceleration.
 
 /*
@@ -43,6 +43,12 @@ function accellerometro(event) {
   }
 }
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+
 /*
 ABSOLUTE = true if the orientation data in instanceOfDeviceOrientationEvent is provided as the difference between the Earth's coordinate frame and the device's coordinate frame
 false if the orientation data is being provided in reference to some arbitrary, device-determined coordinate frame.
@@ -54,4 +60,23 @@ GAMMA = Rotation around the y axis -- that is, tilting the device toward the lef
 function giroscopio(evento) {
   document.getElementById('body').style.backgroundColor =
     'rgb(' + evento.alpha + ',' + evento.beta + ',' + evento.gamma + ')';
+
+  // let num = getRandomIntInclusive(0, 4);
+  // switch (num) {
+  //   case 0:
+  //     document.getElementById('body').style.backgroundColor = '#FFC300';
+  //     break;
+  //   case 1:
+  //     document.getElementById('body').style.backgroundColor = '#007EEB';
+  //     break;
+  //   case 2:
+  //     document.getElementById('body').style.backgroundColor = '#FF4300';
+  //     break;
+  //   case 3:
+  //     document.getElementById('body').style.backgroundColor = '#008100';
+  //     break;
+  //   case 3:
+  //     document.getElementById('body').style.backgroundColor = '#1C2923';
+  //     break;
+  // }
 }
