@@ -11,7 +11,7 @@ function readyToStart(event) {
 
 const buffer_dati = new Array();
 const MAX_ROTATION = 1800; // Rotation rate value corresponding to a multiplying factor of MAX_MULTIPLIER of the acceleration.
-const BUFFER_LENGTH = 10; // Number of single user data to be stored in the buffer.
+const BUFFER_LENGTH = 20; // Number of single user data to be stored in the buffer.
 const MAX_MULTIPLIER = 1.5; // Maximum value of RotationRate as a weight for the acceleration.
 
 /*
